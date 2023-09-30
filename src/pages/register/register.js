@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "../../styles/register"
-import { StyleSheet, Text, View, TextInput, TouchableOpacity,Linking } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,Linking,Image, Platform, Button, ScrollView } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+//import Constants from 'expo-contants';
+import { StatusBar } from 'expo-status-bar';
 
 export default function Registrar(props) {
 
@@ -10,15 +13,53 @@ export default function Registrar(props) {
         navigation.navigate("Login")
     }
 
-  return (
-      <View style={styles.container}>
-          <View style={styles.secondSection}>
+    const [image,setImage] = useState(null);
 
-              <View >
+    useEffect( async () => {
+        if(Platform.OS !== 'web') {
+            const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                alert('Permiso denegado!!!')
+            }
+        }
+    },[]) 
+
+    const PickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect:[4,3],
+            quality:1
+        })
+        console.log(result)
+        if (!result.cancelled) {
+            setImage(result.uri)
+        }
+    }
+
+  return (
+    
+      <View style={styles.container}>
+
+        
+            <View style={styles.secondSection}>
+
+              <View style={styles.spacing}>
                   <Text style={styles.RegisterText}>REGISTRATE</Text>
               </View>
 
               <View>
+              <ScrollView>
+              <View style={styles.spacingImg}>
+                      <TouchableOpacity style={styles.buttonImg}>
+                          <Text style={styles.buttonTextImg} onPress={PickImage}> Escoge tu imagen </Text>
+                          {image && <Image source={{uri:image}} style={styles.imagenUser} />}
+                      </TouchableOpacity>
+
+                      {/* <Button title="Escoge tu imagen" onPress={PickImage} /> */}
+                      
+                      <StatusBar style='auto' />
+                  </View>
                   <View style={styles.spacing}>
                       <Text style={styles.label}> Full Name</Text>
                       <TextInput
@@ -59,12 +100,16 @@ export default function Registrar(props) {
                       />
                   </View>
 
+                  
+
                   <View style={styles.spacing}>
                       <TouchableOpacity style={styles.button}>
                           <Text style={styles.buttonText}> Registrarse </Text>
                       </TouchableOpacity>
                   </View>
+                  </ScrollView>
               </View>
+              
 
               <View style={[styles.position, styles.row]}>
                   <Text style={styles.label}>Don't have an account?</Text>
@@ -72,9 +117,13 @@ export default function Registrar(props) {
                       <Text style={styles.singIn}>Iniciar Sesión</Text>
                   </TouchableOpacity>
               </View>
-
+              
           </View>
+        
+
+          
       </View>
+     
   );
 }
 

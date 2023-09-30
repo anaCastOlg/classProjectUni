@@ -5,12 +5,14 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 2,
     },
     topSection: {
         flex: .5,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        
     },
     bottomSection: {
         width: '100%',
@@ -22,8 +24,10 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: -400,
-        marginTop: 100,
-        justifyContent: 'center'
+        marginTop: 55,
+        marginBottom:-100,
+        justifyContent: 'center',
+        display: 'block'
     },
     secondSection: {
 
@@ -31,7 +35,8 @@ export default StyleSheet.create({
         backgroundColor: '#FFF',
         width: '100%',
         padding: 20,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        
     },
     title: {
         fontSize: 38,
@@ -39,7 +44,8 @@ export default StyleSheet.create({
         color: 'white'
     },
     label: {
-        color: '#ccc'
+        color: '#ccc',
+
     },
     textInput: {
         color: '#000',
@@ -53,7 +59,22 @@ export default StyleSheet.create({
         backgroundColor: '#750B50',
         padding: 15,
         borderRadius: 25,
-        alignItems: 'center'
+        alignItems: 'center',
+        
+    },
+    buttonImg: {
+        //backgroundColor: '#750B50',
+        padding: 15,
+        borderRadius: 25,
+        alignItems: 'center',
+        width:150,
+        borderColor: '#750B50',
+        shadowColor: '#750B50'
+        
+    },
+    buttonTextImg: {
+        color: '#750B50',
+        fontWeight: 'bold'
     },
     buttonText: {
         color: 'white',
@@ -61,6 +82,17 @@ export default StyleSheet.create({
     },
     spacing: {
         marginTop: 15,
+        //padding: 10,
+        display: 'block'
+
+    },
+    spacingImg: {
+        marginTop: 15,
+        //padding: 10,
+        display: 'block',
+        flexDirection: "row",
+        justifyContent: 'center'
+
     },
     row: {
         flexDirection: 'row',
@@ -70,5 +102,10 @@ export default StyleSheet.create({
         color: '#750B50',
         fontWeight: 'bold',
         paddingLeft: 5
+    },
+    imagenUser:{
+        width:110,
+        height:110,
+        borderRadius: 400/ 2
     }
 })
